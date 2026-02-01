@@ -7,11 +7,13 @@ from datetime import datetime
 import json
 import os
 import uvicorn
+from pathlib import Path
 
 app = FastAPI(title="Portfolio Website")
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="../static"), name="static")
+app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
 # Pydantic models
 class Project(BaseModel):
@@ -96,22 +98,22 @@ BLOG_POSTS = [
 @app.get("/")
 async def read_root():
     """Serve the home page"""
-    return FileResponse("../templates/index.html", media_type="text/html")
+    return FileResponse(BASE_DIR / "templates" / "index.html", media_type="text/html")
 
 @app.get("/about")
 async def read_about():
     """Serve the about page"""
-    return FileResponse("../templates/about.html", media_type="text/html")
+    return FileResponse(BASE_DIR / "templates" / "about.html", media_type="text/html")
 
 @app.get("/blog")
 async def read_blog():
     """Serve the blog page"""
-    return FileResponse("../templates/blog.html", media_type="text/html")
+    return FileResponse(BASE_DIR / "templates" / "blog.html", media_type="text/html")
 
 @app.get("/projects")
 async def read_projects():
     """Serve the projects page"""
-    return FileResponse("../templates/projects.html", media_type="text/html")
+    return FileResponse(BASE_DIR / "templates" / "projects.html", media_type="text/html")
 
 # API endpoints
 @app.get("/api/projects")
