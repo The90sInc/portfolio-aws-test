@@ -16,6 +16,7 @@ A simple yet elegant personal portfolio website built with FastAPI and HTML, des
 ```
 simple_website/
 ├── app/
+│   ├── __init__.py             # initialize python app
 │   └── main.py                 # FastAPI application
 ├── templates/
 │   ├── index.html             # Home page
@@ -64,12 +65,22 @@ pip install -r requirements.txt
 cd app
 ```
 
-2. **Start the FastAPI server**:
+2. **Start the FastAPI server on local**:
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
-3. **Open your browser** and navigate to:
+3. **Start the FastAPI server on Render.com**:
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+4. **Start the FastAPI server on AWS**:
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port {PortNo.}
+```
+
+5. **Open your browser** and navigate to:
 ```
 http://localhost:8000
 ```
